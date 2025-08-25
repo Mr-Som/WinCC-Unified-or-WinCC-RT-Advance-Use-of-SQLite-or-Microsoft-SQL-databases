@@ -1,0 +1,23 @@
+# Editor directories and files
+.vscode/*
+.vscode
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+Readme.txt
+
+# Environment variables
+.env
+
+# User files
+.bin
+vendor/
+node_modules/
+
+# Composer
+composer.lock

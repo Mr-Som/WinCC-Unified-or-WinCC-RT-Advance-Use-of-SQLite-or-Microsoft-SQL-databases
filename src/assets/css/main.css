@@ -1,0 +1,269 @@
+:root {
+  --navbar-height: 80px;
+  --background: #ffffff;
+  --foreground: #09090b;
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --popover: #ffffff;
+  --popover-foreground: #09090b;
+  --primary: #18181b;
+  --primary-foreground: #fafafa;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --secondary2: #faf9f5;
+  --secondary2-foreground: #18181b;
+  --secondary3: #e8e6dc;
+  --secondary3-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717b;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+  --destructive: #e7000b;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #9f9fa9;
+  --chart-1: #f54900;
+  --chart-2: #009689;
+  --chart-3: #104e64;
+  --chart-4: #ffb900;
+  --chart-5: #fe9a00;
+  --sidebar: #fafafa;
+  --sidebar-foreground: #09090b;
+  --sidebar-primary: #18181b;
+  --sidebar-primary-foreground: #fafafa;
+  --sidebar-accent: #f4f4f5;
+  --sidebar-accent-foreground: #18181b;
+  --sidebar-border: #e4e4e7;
+  --sidebar-ring: #9f9fa9;
+
+  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: "Geist", "Geist Fallback", ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --radius: 0.625rem;
+
+  --shadow-2xs: 0 1px 3px 0px #000000;
+  --shadow-xs: 0 1px 3px 0px #000000;
+  --shadow-sm: 0 1px 3px 0px #000000, 0 1px 2px -1px #000000;
+  --shadow: 0 1px 3px 0px #000000, 0 1px 2px -1px #000000;
+  --shadow-md: 0 1px 3px 0px #000000, 0 2px 4px -1px #000000;
+  --shadow-lg: 0 1px 3px 0px #000000, 0 4px 6px -1px #000000;
+  --shadow-xl: 0 1px 3px 0px #000000, 0 8px 10px -1px #000000;
+  --shadow-2xl: 0 1px 3px 0px #000000;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --popover: #18181b;
+  --popover-foreground: #fafafa;
+  --primary: #e4e4e7;
+  --primary-foreground: #18181b;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #9f9fa9;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #ff6467;
+  --border: #ffffff1a;
+  --input: #ffffff26;
+  --ring: #71717b;
+  --chart-1: #1447e6;
+  --chart-2: #00bc7d;
+  --chart-3: #fe9a00;
+  --chart-4: #ad46ff;
+  --chart-5: #ff2056;
+  --sidebar: #18181b;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #1447e6;
+  --sidebar-primary-foreground: #fafafa;
+  --sidebar-accent: #27272a;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #ffffff1a;
+  --sidebar-ring: #71717b;
+
+  --shadow-2xs: 0 1px 3px 0px #000000;
+  --shadow-xs: 0 1px 3px 0px #000000;
+  --shadow-sm: 0 1px 3px 0px #000000, 0 1px 2px -1px #000000;
+  --shadow: 0 1px 3px 0px #000000, 0 1px 2px -1px #000000;
+  --shadow-md: 0 1px 3px 0px #000000, 0 2px 4px -1px #000000;
+  --shadow-lg: 0 1px 3px 0px #000000, 0 4px 6px -1px #000000;
+  --shadow-xl: 0 1px 3px 0px #000000, 0 8px 10px -1px #000000;
+  --shadow-2xl: 0 1px 3px 0px #000000;
+}
+
+body {
+  font-family: "Inter" !important;
+  transition: background-color 0.3s, color 0.3s !important;
+}
+
+main {
+  min-height: calc(100vh - var(--navbar-height));
+}
+
+.bg-accent {
+  background-color: var(--accent) !important;
+  color: var(--accent-foreground) !important;
+}
+
+.bg-secondary2,
+.btn-secondary2 {
+  background-color: var(--secondary2) !important;
+  color: var(--secondary3-foreground) !important;
+}
+
+.bg-secondary3,
+.btn-secondary3 {
+  background-color: var(--secondary3) !important;
+  color: var(--secondary3-foreground) !important;
+}
+.btn-secondary2:hover,
+.btn-secondary3:hover {
+  background-color: #d7d5cc !important;
+  color: var(--secondary3-foreground) !important;
+}
+.btn-secondary2:active,
+.btn-secondary3:hover {
+  background-color: #d7d5cc !important;
+  color: var(--secondary3-foreground) !important;
+  border-color: #d7d5cc !important;
+}
+.dt-info {
+  color: var(--accent-foreground) !important;
+  font-size: 0.875rem !important;
+  padding-left: 0.25rem;
+}
+.text-xs {
+  font-size: 0.75rem !important;
+}
+.text-sm {
+  font-size: 0.875rem !important;
+}
+.text-base {
+  font-size: 1rem !important;
+}
+.text-lg {
+  font-size: 1.125rem !important;
+}
+.text-xl {
+  font-size: 1.25rem !important;
+}
+.text-xxl {
+  font-size: 1.5rem !important;
+}
+
+.rounded-md {
+  border-radius: var(--radius) !important;
+  overflow: hidden !important;
+}
+.bg-secondary-dropdown {
+  background-color: var(--secondary2) !important;
+  color: var(--secondary2-foreground) !important;
+}
+.bg-secondary-dropdown:hover {
+  background-color: var(--secondary3) !important;
+  color: var(--secondary3-foreground) !important;
+}
+.bg-secondary-dropdown:focus,
+.bg-secondary-dropdown:active,
+.bg-secondary-dropdown:focus-visible,
+.bg-secondary-dropdown[aria-expanded="true"] {
+  background-color: var(--accent-foreground) !important;
+  color: var(--accent) !important;
+}
+
+/* Style for the label when radio is checked */
+.dropdown-item input[type="radio"]:checked ~ .bg-secondary-dropdown,
+label.bg-secondary-dropdown input[type="radio"]:checked {
+  background-color: var(--accent-foreground) !important;
+  color: var(--accent) !important;
+}
+
+/* Style the radio button when checked */
+.form-check-input:checked {
+  background-color: var(--muted-foreground) !important;
+}
+.btn:active {
+  border-color: none !important;
+}
+
+/* Override Bootstrap pagination for dark theme */
+.pagination {
+  --bs-pagination-padding-x: 0.75rem;
+  --bs-pagination-padding-y: 0.375rem;
+  --bs-pagination-font-size: 1rem;
+  --bs-pagination-color: var(--primary) !important;
+  --bs-pagination-bg: var(--secondary2) !important;
+  --bs-pagination-border-width: var(--bs-border-width) !important;
+  --bs-pagination-border-color: var(--color-border) !important;
+  --bs-pagination-border-radius: var(--radius) !important;
+  --bs-pagination-hover-color: var(--primary) !important;
+  --bs-pagination-hover-bg: var(--secondary3) !important;
+  --bs-pagination-hover-border-color: var(--primary) !important;
+  --bs-pagination-focus-color: var(--primary-foreground) !important;
+  --bs-pagination-focus-bg: var(--primary) !important;
+  --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(var(--color-ring), 0.25) !important;
+  --bs-pagination-active-color: var(--primary-foreground) !important;
+  --bs-pagination-active-bg: var(--primary) !important;
+  --bs-pagination-active-border-color: var(--primary) !important;
+  --bs-pagination-disabled-color: var(--muted-foreground) !important;
+  --bs-pagination-disabled-bg: var(--color-muted) !important;
+  --bs-pagination-disabled-border-color: var(--color-border) !important;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+}
+
+/* Pagination item styles */
+.page-link {
+  color: var(--bs-pagination-color);
+  background-color: var(--bs-pagination-bg);
+  border: var(--bs-pagination-border-width) solid
+    var(--bs-pagination-border-color);
+}
+
+.page-link:hover {
+  color: var(--bs-pagination-hover-color);
+  background-color: var(--bs-pagination-hover-bg);
+  border-color: var(--bs-pagination-hover-border-color);
+}
+
+.page-link:focus {
+  color: var(--bs-pagination-focus-color);
+  background-color: var(--bs-pagination-focus-bg);
+  outline: 0;
+  box-shadow: var(--bs-pagination-focus-box-shadow);
+}
+
+.page-item.active .page-link {
+  color: var(--bs-pagination-active-color) !important;
+  background-color: var(--bs-pagination-active-bg) !important;
+  border-color: var(--bs-pagination-active-border-color) !important;
+}
+
+.page-item.disabled .page-link {
+  color: var(--bs-pagination-disabled-color);
+  background-color: var(--bs-pagination-disabled-bg);
+  border-color: var(--bs-pagination-disabled-border-color);
+}
+
+/* Additional dark theme text color adjustments */
+body.dark {
+  color: var(--color-foreground);
+}
+
+body.dark .page-link {
+  color: var(--primary-foreground);
+}
+
+body.dark .page-item.disabled .page-link {
+  color: var(--color-muted-foreground);
+}

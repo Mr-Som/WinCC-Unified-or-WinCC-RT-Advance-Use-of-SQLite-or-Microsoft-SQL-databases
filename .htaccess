@@ -1,0 +1,36 @@
+RewriteEngine On
+RewriteBase /
+
+# =========================
+# SECURITY RULES (NEW)
+# =========================
+# Block access to vendor and .env
+RewriteRule \.env$ - [F,L,NC]
+
+# Disables directory listing (no file list when no index.html) Best practice
+Options -Indexes
+
+# Allows symbolic links (if your project needs them)
+# Options +FollowSymLinks
+
+# Enables all options (Indexes, FollowSymLinks, etc.) Dangerous
+# Options All
+
+# =========================
+# YOUR EXISTING RULES
+# =========================
+# Remove .php extension (excluding POST)
+
+RewriteCond %{REQUEST_METHOD} !POST [NC]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# Serve .php files without extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*?)/?$ $1.php [NC,L]
+
+# Route all other requests to src/index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ src/index.php [QSA,L]
