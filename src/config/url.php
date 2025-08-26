@@ -26,3 +26,8 @@ function vendor_url($path = '')
     $vendorPath = str_replace('src/', 'vendor/', base_url($path));
     return $vendorPath;
 }
+function db_url($path = '')
+{
+    $vendorPath = str_replace('src/', 'database/', base_url($path));
+    return $vendorPath;
+}

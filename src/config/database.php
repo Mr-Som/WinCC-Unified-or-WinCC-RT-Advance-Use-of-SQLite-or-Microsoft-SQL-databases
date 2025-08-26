@@ -6,7 +6,7 @@ class Database
     public static function getConnection()
     {
         if (self::$pdo === null) {
-            $dbFile = __DIR__ . '/database.sqlite';  // Path to SQLite DB file
+            $dbFile = realpath(__DIR__ . '/../../database/rtr.db');  // Path to existing SQLite DB file
             try {
                 self::$pdo = new PDO("sqlite:" . $dbFile);
                 self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

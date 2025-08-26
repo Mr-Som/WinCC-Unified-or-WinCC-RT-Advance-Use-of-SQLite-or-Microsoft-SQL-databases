@@ -1,6 +1,6 @@
 $(document).ready(function () {
-  $("#apiKeysTable").DataTable({
-    dom: "t<'row'<'d-flex justify-content-start align-items-end col-md-5 mt-2 px-3'i><'d-flex justify-content-end align-items-center col-md-7 mt-2'p>>",
+  $("#trainTable").DataTable({
+    dom: "t<'row'<'d-flex justify-content-start align-items-center col-md-5 mt-1 px-3'i><'d-flex justify-content-end align-items-center col-md-7 mt-1'p>>",
     ordering: false,
     fixedHeader: {
       header: true,
@@ -15,17 +15,17 @@ $(document).ready(function () {
     },
     pagingType: "full_numbers",
     scrollCollapse: true,
-    scrollY: "350px",
+    scrollY: "260px",
   });
 
   let nonFirstChildElements = document.querySelectorAll(
-    "#apiKeysTable > :not(:first-child)"
+    "#trainTable > :not(:first-child)"
   );
   nonFirstChildElements.forEach(function (element) {
     element.style.borderTop = "inherit";
   });
   let rows = document.querySelectorAll(
-    "#apiKeysTable > :not(:last-child) > :last-child > *"
+    "#trainTable > :not(:last-child) > :last-child > *"
   );
   rows.forEach(function (row) {
     row.style.borderBottomColor = "inherit";
@@ -69,3 +69,58 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+function updateDropdown(element, dropdownId) {
+  const text = element.textContent.trim();
+  const dropdownButton = document.getElementById(dropdownId);
+  const selectedSpan = dropdownButton.querySelector(".selected-option");
+  selectedSpan.textContent = text;
+
+  // Remove active class from all items
+  const dropdown = element.closest(".dropdown");
+  const items = dropdown.querySelectorAll(".dropdown-item");
+  items.forEach((item) => {
+    item.classList.remove("bg-dark", "text-white");
+  });
+
+  // Add active class to selected item
+  element.classList.add("bg-dark", "text-white");
+}
+
+// Initialize dropdowns
+document.addEventListener("DOMContentLoaded", function () {
+  // Handle hover effects
+  document.querySelectorAll(".dropdown-item").forEach((item) => {
+    item.addEventListener("mouseenter", function () {
+      if (!this.classList.contains("bg-dark")) {
+        this.classList.add("bg-secondary3");
+      }
+    });
+    item.addEventListener("mouseleave", function () {
+      if (!this.classList.contains("bg-dark")) {
+        this.classList.remove("bg-secondary3");
+      }
+    });
+  });
+});
+
+function deleteReport(id) {
+  if (confirm("Are you sure you want to delete this report?")) {
+    fetch(`delete.php?id=${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          // Refresh the table or remove the row
+          window.location.reload();
+        } else {
+          alert("Error deleting report: " + data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Error deleting report");
+      });
+  }
+}
