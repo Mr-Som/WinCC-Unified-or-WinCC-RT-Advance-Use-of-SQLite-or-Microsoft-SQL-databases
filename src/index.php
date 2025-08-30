@@ -2,7 +2,6 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-require_once __DIR__ . '/config/url.php';
 //require_once __DIR__ . '/includes/auth-check.php';
 require_once __DIR__ . '/includes/header.php';
 include __DIR__ . '/config/database.php';
@@ -15,6 +14,8 @@ $trains = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body class="bg-secondary2">
+    <?php require_once __DIR__ . '/includes/about.modal.php'; ?>
+    <?php require_once __DIR__ . '/includes/help.modal.php'; ?>
     <?php require_once __DIR__ . '/includes/navbar.php'; ?>
     <!-- Start container-fluid -->
     <div class="container-fluid">

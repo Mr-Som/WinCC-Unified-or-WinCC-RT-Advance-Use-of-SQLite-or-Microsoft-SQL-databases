@@ -1,25 +1,45 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+//require_once __DIR__ . '/includes/auth-check.php';
+require_once __DIR__ . '/includes/header.php';
+include __DIR__ . '/config/database.php';
+$pdo = Database::getConnection();
 
-//--- Create mPDF instance   
-$mpdf = new \Mpdf\Mpdf([
-    'default_font' => 'FreeSans',
-    'format' => 'A4',
-    'orientation' => 'P', // Or 'L' for landscape
-    'margin_left' => 10,
-    'margin_right' => 10,
-    'margin_top' => 10,
-    'margin_bottom' => 10,
-]);
-//--- HTML Content 
-$html = '
+// Fetch data from the database
+$stmt = $pdo->query("SELECT * FROM train_maintenance_report");
+$trains = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+</head>
+
+<body class="bg-secondary2">
+    <?php require_once __DIR__ . '/includes/about.modal.php'; ?>
+    <?php require_once __DIR__ . '/includes/help.modal.php'; ?>
+    <?php require_once __DIR__ . '/includes/navbar.php'; ?>
+    <!-- Start container-fluid -->
+    <div class="container-fluid">
+
+        <?php
+        require_once __DIR__ . '/../vendor/autoload.php';
+
+        //--- Create mPDF instance   
+        $mpdf = new \Mpdf\Mpdf([
+            'default_font' => 'FreeSans',
+            'format' => 'A4',
+            'orientation' => 'P', // Or 'L' for landscape
+            'margin_left' => 10,
+            'margin_right' => 10,
+            'margin_top' => 10,
+            'margin_bottom' => 10,
+        ]);
+
+        //--- HTML Content 
+        $html = '
 <!DOCTYPE html>
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="generator" content="PhpSpreadsheet, https://github.com/PHPOffice/PhpSpreadsheet">
-    <meta name="author" content="somnath halder" />
     <link rel="stylesheet" href="assets/css/annexure-B/style.css">
 </head>
 
@@ -354,8 +374,31 @@ $html = '
 </body>
 
 </html>';
-$mpdf->WriteHTML($html);
-// Set the file name 
-$fileName = 'test.pdf';
-// Display the PDF in the browser 
-$mpdf->Output($fileName, 'I');
+        $mpdf->WriteHTML($html);
+
+        // Output the PDF to a temporary file
+        // Capture PDF content
+        $pdfContent = $mpdf->Output('', 'S');
+        $_SESSION['pdf_content'] = $pdfContent;
+
+        // Create a div to contain the PDF viewer with a responsive height
+        echo '<div class="container mt-4 mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <div style="height: 80vh;">
+                        <iframe src="pdf-viewer.php" 
+                            style="width: 100%; height: 100%; border: none;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>';
+
+        // Close the container-fluid div
+        echo '</div>';
+
+        // Include the footer
+        require_once __DIR__ . '/includes/footer.php';
+        ?>
+</body>
+
+</html>

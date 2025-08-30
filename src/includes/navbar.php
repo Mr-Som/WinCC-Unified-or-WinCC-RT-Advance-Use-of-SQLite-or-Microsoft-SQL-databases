@@ -7,15 +7,26 @@ if (session_status() == PHP_SESSION_NONE) {
 <nav class="navbar bg-secondary3 navbar-expand-lg sticky-top py-1">
     <div class="container-fluid d-flex justify-content-between align-items-center pe-2 ps-3">
         <div class="menu-bar d-flex justify-content-start align-items-center">
-            <div class="menu-item">Home</div>
-            <div class="menu-item">Reports</div>
-            <div class="menu-item">About</div>
-            <div class="menu-item">Contact</div>
-            <div class="menu-item">Help</div>
-            <div class="menu-item">Refresh</div>
+            <div class="menu-item" onclick="window.location.href='index.php'">
+                <span class="mdi mdi-home-outline"></span> Home
+            </div>
+            <div class="menu-item" onclick="window.location.href='reports.php'">
+                <span class="mdi mdi-file-document-outline"></span> Reports
+            </div>
+            <div class="menu-item" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                <span class="mdi mdi-information-outline"></span> About
+            </div>
+            <div class="menu-item" data-bs-toggle="modal" data-bs-target="#helpModal">
+                <span class="mdi mdi-help-circle-outline"></span> Help
+            </div>
+            <div class="menu-item" onclick="window.location.reload()">
+                <span class="mdi mdi-refresh"></span> Refresh
+            </div>
         </div>
         <div class="menu-bar d-flex justify-content-start align-items-center">
-            <div class="menu-item">?</div>
+            <div class="menu-item">
+                <span class="mdi mdi-help"></span>
+            </div>
         </div>
     </div>
 </nav>
