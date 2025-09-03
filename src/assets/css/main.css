@@ -57,7 +57,7 @@ body {
   transition: background-color 0.3s, color 0.3s !important;
 }
 main {
-  min-height: calc(100vh - var(--navbar-height));
+  min-height: calc(100vh - var(--navbar-height)) !important;
 }
 .bg-secondary-dropdown {
   background-color: var(--secondary2) !important;

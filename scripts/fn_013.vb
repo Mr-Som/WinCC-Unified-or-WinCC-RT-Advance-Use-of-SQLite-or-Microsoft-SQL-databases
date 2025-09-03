@@ -1,0 +1,60 @@
+Sub FN_013()
+
+    On Error Resume Next
+
+    Dim objConn, objRS, sqlQuery, checkQuery
+    Dim dbPath, logFile, strError, fso, file, timeStamp
+    Dim test_id, manrel_step2
+
+    ' Get DB and log paths from SmartTags
+    dbPath = HmiRuntime.SmartTags("DB_PATH")
+    logFile = HmiRuntime.SmartTags("LOG_PATH")
+
+    ' Get test ID
+    test_id = HmiRuntime.SmartTags("NEW_RTR_TEST_ID")
+
+    ' Read tag value and convert to text
+    If HmiRuntime.SmartTags("MANREL_STEP2") = 1 Then
+        manrel_step2 = "YES"
+    Else
+        manrel_step2 = "NO"
+    End If
+
+    ' Open DB Connection
+    Set objConn = CreateObject("ADODB.Connection")
+    objConn.Open "Driver={SQLite3 ODBC Driver};Database=" & dbPath & ";"
+
+    ' Check if record exists
+    checkQuery = "SELECT COUNT(*) AS cnt FROM tbl_lhb_11 WHERE id=" & test_id
+    Set objRS = objConn.Execute(checkQuery)
+
+    ' Insert or Update based on record availability
+    If objRS("cnt") > 0 Then
+        sqlQuery = "UPDATE tbl_lhb_11 SET " & _
+                   "manrel_step2='" & manrel_step2 & "' " & _
+                   "WHERE id=" & test_id
+    Else
+        sqlQuery = "INSERT INTO tbl_lhb_11 (id, manrel_step2) VALUES (" & _
+                   test_id & ",'" & manrel_step2 & "')"
+    End If
+
+    ' Execute query
+    objConn.Execute sqlQuery
+
+    ' Error handling and log writing
+    If Err.Number <> 0 Then
+        strError = "Error in FN_013: " & Err.Description
+        timeStamp = Now
+        Set fso = CreateObject("Scripting.FileSystemObject")
+        Set file = fso.OpenTextFile(logFile, 8, True)
+        file.WriteLine timeStamp & " - " & strError
+        file.Close
+        Err.Clear
+    End If
+
+    ' Close objects
+    objConn.Close
+    Set objConn = Nothing
+    Set objRS = Nothing
+
+End Sub

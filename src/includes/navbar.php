@@ -10,7 +10,7 @@ if (session_status() == PHP_SESSION_NONE) {
             <div class="menu-item" onclick="window.location.href='index.php'">
                 <span class="mdi mdi-home-outline"></span> Home
             </div>
-            <div class="menu-item" onclick="window.location.href='reports.php'">
+            <div class="menu-item" onclick="window.location.href='annexure.php'">
                 <span class="mdi mdi-file-document-outline"></span> Reports
             </div>
             <div class="menu-item" data-bs-toggle="modal" data-bs-target="#aboutModal">

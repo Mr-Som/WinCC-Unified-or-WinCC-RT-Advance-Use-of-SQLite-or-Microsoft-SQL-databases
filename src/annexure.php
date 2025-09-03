@@ -382,16 +382,12 @@ $trains = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $_SESSION['pdf_content'] = $pdfContent;
 
         // Create a div to contain the PDF viewer with a responsive height
-        echo '<div class="container mt-4 mb-4">
-            <div class="row">
-                <div class="col-12">
-                    <div style="height: 80vh;">
+        echo '<div class="row p-0">
+                    <div class="p-0" style="height: calc(100vh - 40px);">
                         <iframe src="pdf-viewer.php" 
                             style="width: 100%; height: 100%; border: none;"></iframe>
-                    </div>
                 </div>
-            </div>
-        </div>';
+            </div>';
 
         // Close the container-fluid div
         echo '</div>';
