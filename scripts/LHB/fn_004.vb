@@ -18,14 +18,14 @@ Sub FN_004()
     rel_coach = HmiRuntime.SmartTags("REL_COACH")
 
     ' Convert AR_CHRG_EMPTY to "charge" or "empty"
-    If HmiRuntime.SmartTags("AR_CHRG_EMPTY") = 1 Then
+    If HmiRuntime.SmartTags("AR_CHRG_EMPTY") = True Then
         ar_charge = "charge"
     Else
         ar_charge = "empty"
     End If
 
     ' Convert CR_CHRG_EMPTY to "charge" or "empty"
-    If HmiRuntime.SmartTags("CR_CHRG_EMPTY") = 1 Then
+    If HmiRuntime.SmartTags("CR_CHRG_EMPTY") = True Then
         cr_charge = "charge"
     Else
         cr_charge = "empty"
@@ -69,7 +69,7 @@ Sub FN_004()
 
     ' Error handling
     If Err.Number <> 0 Then
-        strError = "DB Error: " & Err.Description
+        strError = "FN_004 Error: " & Err.Description
         timeStamp = Now
 
         ' Log error in text file

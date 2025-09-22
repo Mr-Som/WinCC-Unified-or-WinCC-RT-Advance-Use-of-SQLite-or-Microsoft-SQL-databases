@@ -1,4 +1,4 @@
-Sub FN_004()
+Sub FN_005()
 
     On Error Resume Next ' Enable error handling
 
@@ -14,30 +14,34 @@ Sub FN_004()
     test_id = HmiRuntime.SmartTags("NEW_RTR_TEST_ID")
 
     ' Get SmartTag values for numeric fields
-    bp_value = HmiRuntime.SmartTags("ISG_START_READ_VALUE_AI_1")
-    fp_value = HmiRuntime.SmartTags("ISG_START_READ_VALUE_AI_2")
+    bp_value = Round(CDbl(HmiRuntime.SmartTags("ISG_START_READ_VALUE_AI_1")), 2)
+    fp_value = Round(CDbl(HmiRuntime.SmartTags("ISG_START_READ_VALUE_AI_2")), 2)
+
+    ' Get SmartTag values for numeric fields
+    ' bp_value =  Round(CDbl(HmiRuntime.SmartTags("ISG_ACTUAL_VALUE_AI_1")), 2)
+    ' fp_value =  Round(CDbl(HmiRuntime.SmartTags("ISG_ACTUAL_VALUE_AI_2")), 2)
 
     ' Convert 1 → Yes / No
-    If HmiRuntime.SmartTags("ATTENDED_LEAKAGE") = 1 Then
+    If HmiRuntime.SmartTags("SEALING_ATTENDED_LEAKAGE_BIT") = True Then
         attended_leakage = "Yes"
     Else
         attended_leakage = "No"
     End If
 
-    If HmiRuntime.SmartTags("AR_TANK_EMPTY") = 1 Then
+    If HmiRuntime.SmartTags("SEALING_AR_TANK_EMPTY_BIT") = True Then
         ar_tank_empty = "Yes"
     Else
         ar_tank_empty = "No"
     End If
 
-    If HmiRuntime.SmartTags("CR_TANK_EMPTY") = 1 Then
+    If HmiRuntime.SmartTags("SEALING_CR_TANK_EMPTY_BIT") = True Then
         cr_tank_empty = "Yes"
     Else
         cr_tank_empty = "No"
     End If
 
     ' Convert defect persist: 1 → Sick / else → Not Sick
-    If HmiRuntime.SmartTags("DEFECT_PERSIST") = 1 Then
+    If HmiRuntime.SmartTags("SEALING_DEFECT_PERSIST_BIT") = True Then
         defect_persist = "Sick"
     Else
         defect_persist = "Not Sick"
@@ -46,6 +50,17 @@ Sub FN_004()
     ' Create ADODB connection
     Set objConn = CreateObject("ADODB.Connection")
     objConn.Open "Driver={SQLite3 ODBC Driver};Database=" & dbPath & ";"
+
+    If Err.Number <> 0 Then
+        strError = "Error in FN_005 : Failed to connect to database - " & Err.Description
+        timeStamp = Now
+        Set fso = CreateObject("Scripting.FileSystemObject")
+        Set file = fso.OpenTextFile(logFile, 8, True)
+        file.WriteLine timeStamp & " - " & strError
+        file.Close
+        Err.Clear
+        Exit Sub
+    End If
 
     ' Check if ID exists
     checkQuery = "SELECT COUNT(*) AS cnt FROM tbl_lhb_03 WHERE id = " & test_id
@@ -74,15 +89,17 @@ Sub FN_004()
 
     ' Error handling
     If Err.Number <> 0 Then
-        strError = "DB Error: " & Err.Description
+        strError = "Error in FN_005 : SQL execution failed - " & Err.Description & " | Query: " & sqlQuery
         timeStamp = Now
-
-        ' Log error to file
         Set fso = CreateObject("Scripting.FileSystemObject")
         Set file = fso.OpenTextFile(logFile, 8, True)
         file.WriteLine timeStamp & " - " & strError
         file.Close
         Err.Clear
+        objConn.Close
+        Set objConn = Nothing
+        Set objRS = Nothing
+        Exit Sub
     End If
 
     ' Close connection

@@ -14,7 +14,7 @@ Sub FN_013()
     test_id = HmiRuntime.SmartTags("NEW_RTR_TEST_ID")
 
     ' Read tag value and convert to text
-    If HmiRuntime.SmartTags("MANREL_STEP2") = 1 Then
+    If HmiRuntime.SmartTags("MANREL_STEP2") = True Then
         manrel_step2 = "YES"
     Else
         manrel_step2 = "NO"

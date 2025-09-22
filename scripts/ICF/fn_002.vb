@@ -1,4 +1,4 @@
-Sub GET_TEST_ID_RTR()
+Sub FN_002()
 
     On Error Resume Next ' Enable error handling
 
@@ -33,7 +33,7 @@ Sub GET_TEST_ID_RTR()
 
     If Err.Number <> 0 Then
         ' Handle DB error
-        strError = "DB Error: " & Err.Description
+        strError = "FN_002 Error: " & Err.Description
         timeStamp = Now
         logFile = "C:\xampp\htdocs\database\error_logs.txt"
         Set fso = CreateObject("Scripting.FileSystemObject")

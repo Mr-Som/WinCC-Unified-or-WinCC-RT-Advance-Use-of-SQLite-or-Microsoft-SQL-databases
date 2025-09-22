@@ -61,7 +61,7 @@ Sub FN_01()
 
     ' Error handling
     If Err.Number <> 0 Then
-        strError = "DB Error: " & Err.Description
+        strError = "FN_001 Error: " & Err.Description
         timeStamp = Now
 
         ' Log error to text file

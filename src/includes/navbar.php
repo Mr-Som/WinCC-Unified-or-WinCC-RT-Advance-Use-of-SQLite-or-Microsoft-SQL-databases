@@ -10,8 +10,8 @@ if (session_status() == PHP_SESSION_NONE) {
             <div class="menu-item" onclick="window.location.href='index.php'">
                 <span class="mdi mdi-home-outline"></span> Home
             </div>
-            <div class="menu-item" onclick="window.location.href='annexure.php'">
-                <span class="mdi mdi-file-document-outline"></span> Reports
+            <div class="menu-item" data-bs-toggle="modal" data-bs-target="#editModal">
+                <span class="mdi mdi-file-document-outline"></span> Edit
             </div>
             <div class="menu-item" data-bs-toggle="modal" data-bs-target="#aboutModal">
                 <span class="mdi mdi-information-outline"></span> About
@@ -24,9 +24,15 @@ if (session_status() == PHP_SESSION_NONE) {
             </div>
         </div>
         <div class="menu-bar d-flex justify-content-start align-items-center">
-            <div class="menu-item">
-                <span class="mdi mdi-help"></span>
-            </div>
+            <?php
+            // Get the current page name
+            $currentPage = basename($_SERVER['PHP_SELF']);
+            if ($currentPage !== 'index.php'):
+            ?>
+                <div class="menu-item" onclick="window.history.back()">
+                    <span class="mdi mdi-arrow-left"></span> Back
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </nav>

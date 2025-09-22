@@ -14,25 +14,25 @@ Sub FN_006()
     test_id = HmiRuntime.SmartTags("NEW_RTR_TEST_ID")
 
     ' Convert values: 1 → Yes, else No
-    If HmiRuntime.SmartTags("FULL_BRK_APPLIED") = 1 Then
+    If HmiRuntime.SmartTags("FULL_BRK_APPLIED") = True Then
         full_brk_applied = "Applied"
     Else
         full_brk_applied = "Not Applied"
     End If
 
-    If HmiRuntime.SmartTags("FULL_BRK_REL_IN_ISO") = 1 Then
+    If HmiRuntime.SmartTags("FULL_BRK_REL_IN_ISO") = True Then
         full_break_rel_iso = "Yes"
     Else
         full_break_rel_iso = "No"
     End If
 
-    If HmiRuntime.SmartTags("FULL_BRK_REL_INDIC") = 1 Then
+    If HmiRuntime.SmartTags("FULL_BRK_REL_INDIC") = True Then
         full_brk_rel_indic = "Green"
     Else
         full_brk_rel_indic = "No"
     End If
 
-    If HmiRuntime.SmartTags("FULL_BRK_APPLY_INDIC") = 1 Then
+    If HmiRuntime.SmartTags("FULL_BRK_APPLY_INDIC") = True Then
         full_brk_apply_indic = "Red"
     Else
         full_brk_apply_indic = "No"
@@ -67,7 +67,7 @@ Sub FN_006()
 
     ' Error handling
     If Err.Number <> 0 Then
-        strError = "DB Error: " & Err.Description
+        strError = "FN_006 Error: " & Err.Description
         timeStamp = Now
 
         ' Log error to file

@@ -15,37 +15,37 @@ Sub FN_003()
     test_id = HmiRuntime.SmartTags("NEW_RTR_TEST_ID")
 
     ' Convert 1/0 to Yes/No
-    If HmiRuntime.SmartTags("125L_OK") = 2 Then
+    If HmiRuntime.SmartTags("125L_OK") = True Then
         draining_125L = "yes"
     Else
         draining_125L = "no"
     End If
 
-    If HmiRuntime.SmartTags("75L_OK") = 2 Then
+    If HmiRuntime.SmartTags("75L_OK") = True Then
         draining_75L = "yes"
     Else
         draining_75L = "no"
     End If
 
-    If HmiRuntime.SmartTags("150L_OK") = 2 Then
+    If HmiRuntime.SmartTags("150L_OK") = True Then
         draining_150L = "yes"
     Else
         draining_150L = "no"
     End If
 
-    If HmiRuntime.SmartTags("BPST_OK") = 2 Then
+    If HmiRuntime.SmartTags("BPST_OK") = True Then
         bp_strainer = "yes"
     Else
         bp_strainer = "no"
     End If
 
-    If HmiRuntime.SmartTags("FPST_OK") = 2 Then
+    If HmiRuntime.SmartTags("FPST_OK") = True Then
         fp_strainer = "yes"
     Else
         fp_strainer = "no"
     End If
 
-    If HmiRuntime.SmartTags("ALLOFF") = 2 Then
+    If HmiRuntime.SmartTags("ALLOFF") = True Then
         all_off = "yes"
     Else
         all_off = "no"
@@ -87,7 +87,7 @@ Sub FN_003()
 
     ' Error handling
     If Err.Number <> 0 Then
-        strError = "DB Error: " & Err.Description
+        strError = "FN_003 Error: " & Err.Description
         timeStamp = Now
 
         ' Log error in text file

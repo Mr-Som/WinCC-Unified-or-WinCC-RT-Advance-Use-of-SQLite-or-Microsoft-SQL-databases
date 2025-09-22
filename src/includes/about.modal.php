@@ -17,7 +17,7 @@
                     <div class="d-flex align-items-center gap-2">
                         <div>
                             <h6 class="mb-0 text-sm"> <span class="mdi mdi-train"></span> ReportViewer</h6>
-                            <small class="text-muted">Version 1.0.1</small>
+                            <small class="text-muted">Version 1.0.0.54</small>
                         </div>
                     </div>
                     <p class="mb-0">

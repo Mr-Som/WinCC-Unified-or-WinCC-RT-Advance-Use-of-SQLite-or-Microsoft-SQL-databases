@@ -14,13 +14,13 @@ Sub FN_011()
     test_id = HmiRuntime.SmartTags("NEW_RTR_TEST_ID")
 
     ' Convert tags to text values
-    If HmiRuntime.SmartTags("GHBCABLE_OK") = 1 Then
+    If HmiRuntime.SmartTags("GHBCABLE_OK") = True Then
         ghbcable_ok = "OK"
     Else
         ghbcable_ok = "NOT OK"
     End If
 
-    If HmiRuntime.SmartTags("GHBGREEN_OK") = 1 Then
+    If HmiRuntime.SmartTags("GHBGREEN_OK") = True Then
         ghbgreen_ok = "OK"
     Else
         ghbgreen_ok = "NOT OK"

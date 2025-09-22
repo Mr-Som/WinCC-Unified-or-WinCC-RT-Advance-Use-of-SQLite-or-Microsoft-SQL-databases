@@ -179,3 +179,8 @@ body.dark .page-item.disabled .page-link {
   font-size: 0.75rem !important;
   padding-left: 0.25rem;
 }
+.dt-scroll-body {
+  min-height: 200px !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--color-border) var(--secondary2) !important;
+}

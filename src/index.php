@@ -14,6 +14,7 @@ $trains = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body class="bg-secondary2">
+    <?php require_once __DIR__ . '/includes/edit.modal.php'; ?>
     <?php require_once __DIR__ . '/includes/about.modal.php'; ?>
     <?php require_once __DIR__ . '/includes/help.modal.php'; ?>
     <?php require_once __DIR__ . '/includes/navbar.php'; ?>
@@ -53,6 +54,16 @@ $trains = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <li>
                                             <button class="dropdown-item text-xs d-flex align-items-center px-3 py-2 bg-secondary-dropdown rounded-md" onclick="updateDropdown(this, 'dateRangeDropdown')">
                                                 Last 30 days
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item text-xs d-flex align-items-center px-3 py-2 bg-secondary-dropdown rounded-md" onclick="updateDropdown(this, 'dateRangeDropdown')">
+                                                Last 60 days
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item text-xs d-flex align-items-center px-3 py-2 bg-secondary-dropdown rounded-md" onclick="updateDropdown(this, 'dateRangeDropdown')">
+                                                Last 90 months
                                             </button>
                                         </li>
                                         <li>
@@ -159,13 +170,13 @@ $trains = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <?php if (count($trains) > 0): ?>
                                     <?php foreach ($trains as $index => $train): ?>
                                         <tr>
-                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?php echo $index + 1; ?></td>
-                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?php echo htmlspecialchars($train['train_no']); ?></td>
-                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?php echo htmlspecialchars($train['train_name']); ?></td>
-                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?php echo date('d M, Y', strtotime($train['date_of_testing'])); ?></td>
-                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?php echo htmlspecialchars($train['operator_name']); ?></td>
-                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?php echo htmlspecialchars($train['shift']); ?></td>
-                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?php echo htmlspecialchars($train['coach_type']); ?></td>
+                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?= $index + 1; ?></td>
+                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?= htmlspecialchars($train['train_no']); ?></td>
+                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?= htmlspecialchars($train['train_name']); ?></td>
+                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?= date('d M, Y', strtotime($train['created_at'])); ?></td>
+                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?= htmlspecialchars($train['operator_name']); ?></td>
+                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?= htmlspecialchars($train['shift']); ?></td>
+                                            <td class="bg-secondary3 text-xs text-center border-secondary"><?= htmlspecialchars($train['coach_type']); ?></td>
                                             <td class="bg-secondary3 text-sm text-center border-secondary">
                                                 <div class="dropdown">
                                                     <button class="btn bg-secondary-dropdown px-2 py-1 text-sm" type="button" id="actionDropdown<?php echo $index; ?>" data-bs-toggle="dropdown" aria-expanded="false">
@@ -173,12 +184,12 @@ $trains = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end bg-secondary2 rounded-md p-1 border-0" aria-labelledby="actionDropdown<?php echo $index; ?>" style="min-width: 120px;">
                                                         <li>
-                                                            <a href="view.php?id=<?php echo $train['id']; ?>" class="dropdown-item d-flex align-items-center gap-2 bg-secondary-dropdown rounded-md px-3 py-2 text-sm">
+                                                            <a href="<?= strtolower($train['coach_type']) === 'icf' ? 'annexure-B.php' : 'annexure-A.php'; ?>?id=<?= $train['id']; ?>" class="dropdown-item d-flex align-items-center gap-2 bg-secondary-dropdown rounded-md px-3 py-2 text-sm">
                                                                 <span class="mdi mdi-eye-outline"></span> View
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <button onclick="deleteReport(<?php echo $train['id']; ?>)" class="dropdown-item d-flex align-items-center gap-2 bg-secondary-dropdown rounded-md px-3 py-2 text-sm text-destructive">
+                                                            <button onclick="deleteReport(<?= $train['id']; ?>)" class="dropdown-item d-flex align-items-center gap-2 bg-secondary-dropdown rounded-md px-3 py-2 text-sm text-destructive">
                                                                 <span class="mdi mdi-delete-outline"></span> Delete
                                                             </button>
                                                         </li>
@@ -193,6 +204,7 @@ $trains = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <td class="bg-secondary3 text-xs text-center"></td>
                                         <td class="bg-secondary3 text-xs text-center"></td>
                                         <td class="bg-secondary3 text-xs text-center">No records found.</td>
+                                        <td class="bg-secondary3 text-xs text-center"></td>
                                         <td class="bg-secondary3 text-xs text-center"></td>
                                         <td class="bg-secondary3 text-xs text-center"></td>
                                         <td class="bg-secondary3 text-xs text-center"></td>
