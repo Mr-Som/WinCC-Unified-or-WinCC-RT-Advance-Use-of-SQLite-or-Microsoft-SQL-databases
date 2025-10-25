@@ -13,6 +13,12 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 }
 $reportId = (int)$_GET['id'];
 
+if (isset($_COOKIE['title'])) {
+  $pageTitle = htmlspecialchars($_COOKIE['title']);
+} else {
+  $pageTitle = '';
+}
+
 // Fetch data for the specific report
 $query = "
     SELECT 
@@ -388,7 +394,7 @@ $created_at = htmlspecialchars($report['created_at'] ? date('Y-m-d_H-i-s', strto
             <td class="column0 style18 s style18" colspan="12">Annexure-B</td>
           </tr>
           <tr class="row0">
-            <td class="column0 style49 s style49" colspan="12">' . isset($_COOKIE['title']) ? htmlspecialchars($_COOKIE['title']) : '' . '</td>
+            <td class="column0 style49 s style49" colspan="12">' .  $pageTitle . '</td>
           </tr>
           <tr class="row1">
             <td class="column0 style16 s style16" colspan="12">
@@ -407,7 +413,7 @@ $created_at = htmlspecialchars($report['created_at'] ? date('Y-m-d_H-i-s', strto
             <td class="column0 style42 s style43" colspan="2">
               Train No. : ' . $train_no . '
             </td>
-            <td class="column2 style7 s">Load: ' . $load . '</td>
+            <td class="column2 style7 s">SSE Name: ' . $load . '</td>
             <td class="column3 style39 s style40" colspan="2">
               Date: ' . $date_of_testing . '
             </td>

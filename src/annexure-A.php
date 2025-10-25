@@ -13,6 +13,12 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 }
 $reportId = (int)$_GET['id'];
 
+if (isset($_COOKIE['title'])) {
+    $pageTitle = htmlspecialchars($_COOKIE['title']);
+} else {
+    $pageTitle = '';
+}
+
 // Fetch data for the specific report
 $query = "
     SELECT 
@@ -36,11 +42,13 @@ $query = "
         lhb01.bp_strainer,
         lhb01.fp_strainer,
         lhb01.all_off,
+        lhb01.bp_chrg_time,
         lhb01.front_pwr_car_fp,
         lhb01.rear_pwr_car_fp,
         lhb02.brake_released,
         lhb02.ar_chrg_empty,
         lhb02.cr_chrg_empty,
+        lhb02.fp_chrg_time,
         lhb02.front_pwr_car_bp as fr_bp,
         lhb02.front_pwr_car_fp as fr_fp,
         lhb02.lslrd_pwr_car_bp,
@@ -111,11 +119,13 @@ $draining_of_150l = htmlspecialchars($report['draining_of_150l'] ?? '');
 $bp_strainer = htmlspecialchars($report['bp_strainer'] ?? '');
 $fp_strainer = htmlspecialchars($report['fp_strainer'] ?? '');
 $all_off = htmlspecialchars($report['all_off'] ?? '');
+$bp_chrg_time = htmlspecialchars($report['bp_chrg_time'] ?? '');
 $front_pwr_car_fp = htmlspecialchars($report['front_pwr_car_fp'] ?? '');
 $rear_pwr_car_fp = htmlspecialchars($report['rear_pwr_car_fp'] ?? '');
 $brake_released = htmlspecialchars($report['brake_released'] ?? '');
 $ar_chrg_empty = htmlspecialchars($report['ar_chrg_empty'] ?? '');
 $cr_chrg_empty = htmlspecialchars($report['cr_chrg_empty'] ?? '');
+$fp_chrg_time = htmlspecialchars($report['fp_chrg_time'] ?? '');
 $fr_bp = htmlspecialchars($report['fr_bp'] ?? '');
 $fr_fp = htmlspecialchars($report['fr_fp'] ?? '');
 $lslrd_pwr_car_bp = htmlspecialchars($report['lslrd_pwr_car_bp'] ?? '');
@@ -195,7 +205,7 @@ $created_at = htmlspecialchars($report['created_at'] ? date('Y-m-d_H-i-s', strto
               <td class="column0 style35 s style35" colspan="5">Annexure-A</td>
             </tr>
             <tr class="row0">
-              <td class="column0 style41 s style41" colspan="5">' . isset($_COOKIE['title']) ? htmlspecialchars($_COOKIE['title']) : '' . '</td>
+              <td class="column0 style41 s style41" colspan="5">' . $pageTitle . '</td>
             </tr>
             <tr class="row1">
                 <td class="column0 style36 s style36" colspan="5">
@@ -205,7 +215,7 @@ $created_at = htmlspecialchars($report['created_at'] ? date('Y-m-d_H-i-s', strto
             </tr>
             <tr class="row2">
                 <td class="column0 style37 s style38" colspan="2">Train No: ' . $train_no . '</td>
-                <td class="column2 style1 s">Load: ' . $load . '</td>
+                <td class="column2 style1 s">SSE Name: ' . $load . '</td>
                 <td class="column3 style37 s style37" colspan="2">Date: ' . $date_of_testing . '</td>
             </tr>
             <tr class="row3">
@@ -263,16 +273,16 @@ $created_at = htmlspecialchars($report['created_at'] ? date('Y-m-d_H-i-s', strto
                         pressure)
                     </span>
                 </td>
-                <td class="column2 style4 s">Pressure in FP :</td>
-                <td class="column3 style12 null"></td>
+                <td class="column2 style4 s">BP Charge Time:</td>
+                <td class="column3 style12 null">' . $bp_chrg_time . '</td>
                 <td class="column4 style14 null style14" rowspan="3"></td>
             </tr>
             <tr class="row13">
-                <td class="column2 style3 s">Front Power Car -</td>
+                <td class="column2 style3 s">FP Pressure: Front Power Car -</td>
                 <td class="column3 style12 s">' . $front_pwr_car_fp . '</td>
             </tr>
             <tr class="row14">
-                <td class="column2 style3 s">Rear Power Car -</td>
+                <td class="column2 style3 s">FP Pressure: Rear Power Car -</td>
                 <td class="column3 style12 s">' . $rear_pwr_car_fp . '</td>
             </tr>
             <tr class="row15">
@@ -303,9 +313,11 @@ $created_at = htmlspecialchars($report['created_at'] ? date('Y-m-d_H-i-s', strto
                     </span>
                 </td>
                 <td class="column2 style24 s style24">
+                    FP Charge Time -
+                    <br>
                     Coaches in which Brakes found released -
                 </td>
-                <td class="column3 style24 s style24">' . $brake_released . '</td>
+                <td class="column3 style24 s style24">' . $fp_chrg_time . '<br>' . $brake_released . '</td>
                 <td class="column4 style26 null style27" rowspan="3"></td>
             </tr>
             <tr class="row17">

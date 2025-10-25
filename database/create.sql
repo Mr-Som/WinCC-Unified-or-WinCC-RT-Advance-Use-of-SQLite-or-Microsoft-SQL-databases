@@ -23,6 +23,7 @@ CREATE TABLE tbl_lhb_01 (
     bp_strainer TEXT,
     fp_strainer TEXT,
     all_off TEXT,
+    bp_chrg_time INTEGER,
     front_pwr_car_fp DECIMAL(10,2),
     rear_pwr_car_fp DECIMAL(10,2),
     FOREIGN KEY (id) REFERENCES train_maintenance_report(id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -33,6 +34,7 @@ CREATE TABLE tbl_lhb_02 (
     brake_released TEXT,
     ar_chrg_empty TEXT,
     cr_chrg_empty TEXT,
+    fp_chrg_time INTEGER,
     front_pwr_car_bp DECIMAL(10,2),
     front_pwr_car_fp DECIMAL(10,2),
     lslrd_pwr_car_bp DECIMAL(10,2),

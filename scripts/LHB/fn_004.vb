@@ -4,7 +4,7 @@ Sub FN_004()
 
     Dim objConn, objRS, sqlQuery, checkQuery
     Dim dbPath, strError, logFile, fso, file, timeStamp
-    Dim test_id, rel_coach, ar_charge, cr_charge
+    Dim test_id, rel_coach, ar_charge, cr_charge, fp_chrg_time
     Dim fr_bp, fr_fp, re_bp, re_fp
 
     ' SQLite database path
@@ -18,14 +18,14 @@ Sub FN_004()
     rel_coach = HmiRuntime.SmartTags("REL_COACH")
 
     ' Convert AR_CHRG_EMPTY to "charge" or "empty"
-    If HmiRuntime.SmartTags("AR_CHRG_EMPTY") = True Then
+    If HmiRuntime.SmartTags("RFB_AR_CHRG_EMPTY_BIT") = True Then
         ar_charge = "charge"
     Else
         ar_charge = "empty"
     End If
 
     ' Convert CR_CHRG_EMPTY to "charge" or "empty"
-    If HmiRuntime.SmartTags("CR_CHRG_EMPTY") = True Then
+    If HmiRuntime.SmartTags("RFB_CR_CHRG_EMPTY_BIT") = True Then
         cr_charge = "charge"
     Else
         cr_charge = "empty"
@@ -36,6 +36,7 @@ Sub FN_004()
     fr_fp = HmiRuntime.SmartTags("FR_FP_VALUE")
     re_bp = HmiRuntime.SmartTags("RE_BP_VALUE")
     re_fp = HmiRuntime.SmartTags("RE_FP_VALUE")
+    fp_chrg_time = HmiRuntime.SmartTags("FPCH_TIME")
 
     ' Create ADODB connection object
     Set objConn = CreateObject("ADODB.Connection")
@@ -47,21 +48,23 @@ Sub FN_004()
 
     If objRS("cnt") > 0 Then
         ' If exists → UPDATE
-        sqlQuery = "UPDATE tbl_lhb_02 SET " & _
-                   "brake_released='" & rel_coach & "'," & _
-                   "ar_chrg_empty='" & ar_charge & "'," & _
-                   "cr_chrg_empty='" & cr_charge & "'," & _
-                   "front_pwr_car_bp='" & fr_bp & "'," & _
-                   "front_pwr_car_fp='" & fr_fp & "'," & _
-                   "lslrd_pwr_car_bp='" & re_bp & "'," & _
-                   "lslrd_pwr_car_fp='" & re_fp & "' " & _
-                   "WHERE id=" & test_id
+            sqlQuery = "UPDATE tbl_lhb_02 SET " & _
+            "brake_released='" & rel_coach & "'," & _
+            "ar_chrg_empty='" & ar_charge & "'," & _
+            "cr_chrg_empty='" & cr_charge & "'," & _
+            "fp_chrg_time=" & fp_chrg_time & "," & _
+            "front_pwr_car_bp='" & fr_bp & "'," & _
+            "front_pwr_car_fp='" & fr_fp & "'," & _
+            "lslrd_pwr_car_bp='" & re_bp & "'," & _
+            "lslrd_pwr_car_fp='" & re_fp & "' " & _
+            "WHERE id=" & test_id
     Else
         ' If not exists → INSERT
-        sqlQuery = "INSERT INTO tbl_lhb_02 (" & _
-                   "id, brake_released, ar_chrg_empty, cr_chrg_empty, front_pwr_car_bp, front_pwr_car_fp, lslrd_pwr_car_bp, lslrd_pwr_car_fp" & _
-                   ") VALUES (" & _
-                   test_id & ",'" & rel_coach & "','" & ar_charge & "','" & cr_charge & "','" & fr_bp & "','" & fr_fp & "','" & re_bp & "','" & re_fp & "')"
+            sqlQuery = "INSERT INTO tbl_lhb_02 (" & _
+            "id, brake_released, ar_chrg_empty, cr_chrg_empty, fp_chrg_time, " & _
+            "front_pwr_car_bp, front_pwr_car_fp, lslrd_pwr_car_bp, lslrd_pwr_car_fp" & _
+            ") VALUES (" & _
+            test_id & ",'" & rel_coach & "','" & ar_charge & "','" & cr_charge & "'," & fp_chrg_time & ",'" & fr_bp & "','" & fr_fp & "','" & re_bp & "','" & re_fp & "')"
     End If
 
     ' Execute SQL query
@@ -69,7 +72,7 @@ Sub FN_004()
 
     ' Error handling
     If Err.Number <> 0 Then
-        strError = "FN_004 Error: " & Err.Description
+        strError = "Error in FN_004: " & Err.Description
         timeStamp = Now
 
         ' Log error in text file

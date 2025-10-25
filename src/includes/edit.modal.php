@@ -23,7 +23,7 @@
             <div class="modal-footer border-0 pt-0">
                 <button
                     type="button"
-                    class="btn btn-sm btn-primary px-3"
+                    class="btn btn-sm btn-dark px-3"
                     id="saveChangesBtn">
                     Save
                 </button>
