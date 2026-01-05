@@ -87,6 +87,9 @@ label.bg-secondary-dropdown input[type="radio"]:checked {
 .btn:active {
   border-color: none !important;
 }
+.btn.disabled {
+  border-color: transparent !important;
+}
 /* Override Bootstrap pagination for dark theme */
 .pagination {
   --bs-pagination-padding-x: 0.75rem;

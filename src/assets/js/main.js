@@ -72,10 +72,6 @@ $(document).ready(function () {
       .getElementById("coachFilterDropdown")
       .querySelector(".selected-option")
       .textContent.trim();
-    const shift = document
-      .getElementById("shiftDropdown")
-      .querySelector(".selected-option")
-      .textContent.trim();
     const today = new Date();
 
     table.rows().every(function () {
@@ -83,7 +79,6 @@ $(document).ready(function () {
       const data = this.data();
       const dateText = row.cells[3].textContent;
       const coachTypeValue = row.cells[6].textContent.toLowerCase();
-      const shiftValue = row.cells[5].textContent.toLowerCase();
 
       // Date range filter
       let matchesDate = true;
@@ -108,17 +103,12 @@ $(document).ready(function () {
         }
       }
 
-      // Coach type filter
+      // Coach (Wagon) type filter
       const matchesCoach =
         coachType === "All Types" || coachTypeValue === coachType.toLowerCase();
 
-      // Shift filter
-      const matchesShift =
-        shift === "All Shifts" || shiftValue === shift.toLowerCase();
-
       // Show or hide row
-      this.node().style.display =
-        matchesDate && matchesCoach && matchesShift ? "" : "none";
+      this.node().style.display = matchesDate && matchesCoach ? "" : "none";
     });
 
     // Redraw table to update pagination

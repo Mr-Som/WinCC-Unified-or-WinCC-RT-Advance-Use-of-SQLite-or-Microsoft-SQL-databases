@@ -2,6 +2,7 @@
 .vscode/*
 .vscode
 !.vscode/extensions.json
+!.vscode/settings.json
 .idea
 .DS_Store
 *.suo
@@ -18,6 +19,9 @@ Readme.txt
 .bin
 vendor/
 node_modules/
+modules/
+test/
+dist/
 
 # Composer
 composer.lock

@@ -1,0 +1,47 @@
+<?php
+// YakPro-Po Configuration File
+
+$conf = [];
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  Obfuscation Behaviour
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+$conf['obfuscate_string_method']    = 'scramble';   // 'b64', 'str_rot13', 'scramble', 'none'
+$conf['obfuscate_variable_name']    = true;         // true, false
+$conf['obfuscate_function_name']    = true;         // true, false
+$conf['obfuscate_class_name']       = true;         // true, false
+$conf['obfuscate_interface_name']   = true;         // true, false
+$conf['obfuscate_trait_name']       = true;         // true, false
+$conf['obfuscate_class_constant_name'] = true;      // true, false
+$conf['obfuscate_constant_name']    = true;         // true, false
+$conf['obfuscate_if_statement']     = true;         // true, false
+$conf['obfuscate_loop_statement']   = true;         // true, false
+$conf['obfuscate_headers']          = false;        // true, false (display yakpro-po header)
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  Ignored Names (Keep these names as is)
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+$conf['tokeep'] = [
+    // Database connectivity, globals, or specific framework methods that might break
+    'index', 
+    'config', 
+    'Database', 
+    'PDO', 
+    'Exception',
+    'POST', 'GET', 'REQUEST', 'SERVER', 'SESSION',
+    'db', // keeping db variable name might be safer if used globally
+];
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  Files/Directories to Ignore (We handle this in build script mostly, but good to have here)
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+$conf['ignore_list'] = [
+    'vendor',
+    'tools',
+    'dist',
+    'database',
+    'test',
+    'scripts'
+];
+
+return $conf;
