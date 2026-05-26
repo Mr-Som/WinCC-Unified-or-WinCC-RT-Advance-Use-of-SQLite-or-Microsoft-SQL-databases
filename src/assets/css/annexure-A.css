@@ -59,6 +59,18 @@ table {
 .s {
   text-align: left;
 }
+.p4 {
+  padding-top: 4;
+  padding-bottom: 4;
+  padding-left: 4;
+  padding-right: 4;
+}
+.p10 {
+  padding-top: 10;
+  padding-bottom: 10;
+  padding-left: 10;
+  padding-right: 10;
+}
 td.style0 {
   vertical-align: bottom;
   border-bottom: none #000000;
@@ -1103,6 +1115,30 @@ th.style41 {
   font-size: 10pt;
   background-color: white;
 }
+td.style42 {
+  vertical-align: top;
+  border-bottom: none !important;
+  border-top: 1px solid #000000 !important;
+  border-left: 1px solid #000000 !important;
+  border-right: 1px solid #000000 !important;
+  font-weight: bold;
+  color: #000000;
+  font-family: "Calibri";
+  font-size: 8pt;
+  background-color: white;
+}
+th.style42 {
+  vertical-align: top;
+  border-bottom: none !important;
+  border-top: 1px solid #000000 !important;
+  border-left: 1px solid #000000 !important;
+  border-right: 1px solid #000000 !important;
+  font-weight: bold;
+  color: #000000;
+  font-family: "Calibri";
+  font-size: 8pt;
+  background-color: white;
+}
 table.sheet0 col.col0 {
   width: 27.78888857pt;
 }
@@ -1162,4 +1198,7 @@ table.sheet0 tr.row36 {
 }
 table.sheet0 tr.row42 {
   height: 22.5pt;
+}
+table.sheet0 tr.row44 {
+  height: 35.5pt;
 }

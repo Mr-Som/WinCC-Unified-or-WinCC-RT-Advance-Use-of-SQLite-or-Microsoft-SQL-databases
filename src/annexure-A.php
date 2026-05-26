@@ -594,10 +594,36 @@ $created_at = htmlspecialchars($report['created_at'] ? date('Y-m-d_H-i-s', strto
             </tr>
             <tr class="row44">
                 <td class="column0 style6 n">18</td>
-                <td class="column1 style4 s">Brake Power</td>
-                <td class="column2 style3 s">Total Cylinder: ' . $total_cylinder . '</td>
-                <td class="column3 style13 s">Operative Cylinder:' . $operative_cylinder . '</td>
-                <td class="column4 style9 null">Percentage: ' . $percentage . '</td>
+                <td class="column1 style4 s p4">Brake Power</td>
+                <td class="column2 style3 s p4">Total Cylinder: ' . $total_cylinder . '</td>
+                <td class="column3 style13 s p4">Operative Cylinder:' . $operative_cylinder . '</td>
+                <td class="column4 style9 null p">Percentage: ' . $percentage . '</td>
+            </tr>
+            <tr class="row45">
+                <td class="column0 style42 s p4" colspan="5">Remarks</td>
+            </tr>
+            <tr class="row46">
+                <td class="column1 style4 s p4" colspan="2">IOP WAGON NO.:</td>
+                <td class="column2 style3 s p4">DEFECTS:</td>
+                <td class="column3 style13 s p4"colspan="2">ACTION:</td>
+            </tr>
+            <tr class="row47">
+                <td class="column0 style42 s p10" colspan="5"></td>
+            </tr>
+            <tr class="row48">
+                <td class="column0 style42 s p10" colspan="5"></td>
+            </tr>
+            <tr class="row49">
+                <td class="column0 style42 s p10" colspan="5"></td>
+            </tr>
+            <tr class="row50">
+                <td class="column0 style42 s p10" colspan="5"></td>
+            </tr>
+            <tr class="row51">
+                <td class="column0 style42 s p10" colspan="5"></td>
+            </tr>
+            <tr class="row52">
+              <td class="column0 style35 s style35 p4" colspan="5"><br><br>Signature</td>
             </tr>
         </tbody>
     </table>
