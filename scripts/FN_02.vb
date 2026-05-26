@@ -1,4 +1,4 @@
-Sub FN_002()
+Sub FN_02()
 
     On Error Resume Next ' Enable error handling
 
@@ -12,8 +12,9 @@ Sub FN_002()
     Dim logFile, fso, file, timeStamp, strError
     Dim dbPath
 
-    ' Path to SQLite database
-    dbPath = "C:\xampp\htdocs\database\rtr.db"
+    ' SQLite database path
+    dbPath = HmiRuntime.SmartTags("DB_PATH")
+    logFile = HmiRuntime.SmartTags("LOG_PATH")
 
     ' DSN-less SQLite ODBC connection string
     strConnectionString = "Driver={SQLite3 ODBC Driver};Database=" & dbPath & ";"
@@ -33,9 +34,8 @@ Sub FN_002()
 
     If Err.Number <> 0 Then
         ' Handle DB error
-        strError = "FN_002 Error: " & Err.Description
+        strError = "FN_02 Error: " & Err.Description
         timeStamp = Now
-        logFile = "C:\xampp\htdocs\database\error_logs.txt"
         Set fso = CreateObject("Scripting.FileSystemObject")
         Set file = fso.OpenTextFile(logFile, 8, True)
         file.WriteLine timeStamp & " - " & strError

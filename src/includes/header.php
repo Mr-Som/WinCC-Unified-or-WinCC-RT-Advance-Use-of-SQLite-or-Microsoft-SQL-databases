@@ -3,7 +3,6 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-require_once __DIR__ . '/../config/url.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,18 +13,18 @@ require_once __DIR__ . '/../config/url.php';
     <title>RTR</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="./vendor/bootstrap/v5.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./vendor/bootstrap/v5.3.7/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="./modules/bootstrap/v5.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./modules/bootstrap/v5.3.7/js/bootstrap.bundle.min.js">
 
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="./vendor/datatables/css/datatables.min.css">
+    <link rel="stylesheet" href="./modules/datatables/css/datatables.min.css">
 
     <!-- Material Design Icons -->
-    <link rel="stylesheet" href="./vendor/materialdesign/v7.4.47/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="./modules/materialdesign/v7.4.47/css/materialdesignicons.min.css" />
 
     <!-- Font -->
     <link
-        href="./vendor/fonts/googleapis/css/css2.css?family=Inter:wght@300;400;500;600&display=swap"
+        href="./modules/fonts/googleapis/css/css2.css?family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
 
     <!-- Custom CSS -->
